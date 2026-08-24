@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Past Simple x Present Perfect | Caroline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+  :root{
+    --coral:#D85A30;
+    --coral-light:#F3D8CC;
+    --coral-mid:#E8896A;
+    --coral-dark:#A8401F;
+    --ink:#20242B;
+    --paper:#FBF8F5;
+    --card:#FFFFFF;
+    --green:#2F7D4F;
+    --green-bg:#E6F4EA;
+    --amber:#B4571D;
+    --amber-bg:#FBEAE0;
+    --line:#E7E0D8;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;line-height:1.5;padding-bottom:70px;}
+  header{background:linear-gradient(135deg,var(--coral-dark),var(--coral));color:#fff;padding:36px 20px 28px;position:sticky;top:0;z-index:20;}
+  header .wrap{max-width:820px;margin:0 auto;}
+  header .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;font-weight:700;}
+  header h1{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(24px,4vw,34px);margin:6px 0 6px;}
+  header p{margin:0;opacity:.92;font-size:15px;max-width:60ch;}
+  nav.tabs{display:flex;gap:6px;max-width:820px;margin:18px auto 0;padding:0 20px;flex-wrap:wrap;}
+  nav.tabs button{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);color:#fff;padding:9px 16px;border-radius:999px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13.5px;cursor:pointer;}
+  nav.tabs button:hover{background:rgba(255,255,255,.24);}
+  nav.tabs button.active{background:#fff;color:var(--coral-dark);}
+  main{max-width:820px;margin:0 auto;padding:28px 20px 10px;}
+  section.panel{display:none;}
+  section.panel.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+  h2.section-title{font-family:'Playfair Display',serif;font-size:23px;font-weight:700;margin:0 0 4px;color:var(--coral-dark);}
+  p.section-sub{margin:0 0 22px;color:#585048;font-size:14.5px;}
+
+  .rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px;}
+  @media(max-width:600px){.rule-grid{grid-template-columns:1fr;}}
+  .rule-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;}
+  .rule-card h3{font-family:'Playfair Display',serif;font-size:17px;margin:0 0 6px;color:var(--coral-dark);}
+  .rule-card p{font-size:13.5px;color:#4a453f;margin:4px 0;}
+  .rule-card .markers{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+  .rule-card .markers span{background:var(--coral-light);color:var(--coral-dark);font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;}
+  .rule-card .ex{margin-top:8px;font-size:13.5px;background:#FAF6F2;border-left:3px solid var(--coral-mid);padding:7px 10px;border-radius:0 8px 8px 0;}
+
+  .qbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px;}
+  .qbox .qnum{font-size:12px;font-weight:700;color:var(--coral-dark);margin-bottom:6px;}
+  .qbox .qtext{font-size:15.5px;margin-bottom:10px;}
+  .qbox input[type=text]{width:100%;max-width:220px;padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14.5px;background:#fff;}
+  .qbox input[type=text]:focus{outline:none;border-color:var(--coral);}
+  .qbox input.correct{border-color:var(--green);background:var(--green-bg);}
+  .qbox input.wrong{border-color:var(--amber);background:var(--amber-bg);}
+  .feedback{font-size:13px;margin-top:6px;font-weight:700;min-height:16px;}
+  .feedback.correct{color:var(--green);}
+  .feedback.wrong{color:var(--amber);}
+
+  .score-bar-wrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:14px;}
+  .score-bar-track{flex:1;height:10px;background:var(--coral-light);border-radius:999px;overflow:hidden;}
+  .score-bar-fill{height:100%;background:var(--coral);width:0%;transition:width .4s ease;}
+  .score-label{font-size:13px;font-weight:700;color:var(--coral-dark);white-space:nowrap;}
+
+  .checklist{background:var(--coral-light);border-radius:12px;padding:14px 18px;font-size:13.5px;color:var(--coral-dark);margin-bottom:22px;}
+  .checklist b{display:block;margin-bottom:4px;}
+
+  .prompt-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:16px;}
+  .prompt-card .qnum{font-size:12px;font-weight:700;color:var(--coral-dark);margin-bottom:4px;}
+  .prompt-card .qtext{font-size:15.5px;margin-bottom:8px;}
+  .prompt-card .tag{display:inline-block;font-size:11.5px;font-weight:700;background:var(--coral-light);color:var(--coral-dark);padding:2px 9px;border-radius:999px;margin-bottom:10px;}
+  .prompt-card textarea{width:100%;min-height:56px;border:1.5px solid var(--line);border-radius:8px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:14.5px;resize:vertical;}
+  .prompt-card textarea:focus{outline:none;border-color:var(--coral);}
+  details.model{margin-top:10px;}
+  details.model summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--coral-dark);list-style:none;}
+  details.model summary::-webkit-details-marker{display:none;}
+  details.model summary::before{content:"▸ ";}
+  details.model[open] summary::before{content:"▾ ";}
+  details.model .model-text{margin-top:8px;background:#FAF6F2;border-left:3px solid var(--coral-mid);padding:10px 14px;border-radius:0 8px 8px 0;font-size:14px;}
+
+  .speak-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:16px;}
+  .speak-card .qnum{font-size:12px;font-weight:700;color:var(--coral-dark);margin-bottom:6px;}
+  .speak-card .qtext{font-size:16px;margin-bottom:10px;}
+  .speak-card .hint{font-size:13px;color:#847a6f;margin-bottom:12px;font-style:italic;}
+  .timer-row{display:flex;align-items:center;gap:12px;}
+  .timer-btn{background:var(--coral);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-weight:700;font-size:13.5px;cursor:pointer;}
+  .timer-btn:hover{background:var(--coral-dark);}
+  .timer-display{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;min-width:52px;}
+  .progress-track{flex:1;height:8px;background:var(--coral-light);border-radius:999px;overflow:hidden;}
+  .progress-fill{height:100%;background:var(--green);width:100%;transition:width 1s linear;}
+  .progress-fill.danger{background:#C23B22;}
+
+  .instructions{background:var(--coral-light);border-radius:12px;padding:12px 16px;font-size:13.5px;color:var(--coral-dark);margin-bottom:18px;}
+
+  .toolbar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:10px 20px;display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;z-index:30;}
+  .toolbar button{border:none;padding:9px 16px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;}
+  .btn-save{background:var(--coral);color:#fff;}
+  .btn-save:hover{background:var(--coral-dark);}
+  .btn-copy{background:#fff;color:var(--coral-dark);border:1.5px solid var(--coral)!important;}
+  .btn-pdf{background:#fff;color:#585048;border:1.5px solid var(--line)!important;}
+  .save-msg{font-size:12px;color:var(--green);font-weight:700;min-width:120px;}
+
+  footer{max-width:820px;margin:30px auto 0;padding:0 20px;color:#8a8175;font-size:12px;}
+
+  @media print{
+    header, nav.tabs, .timer-row, .toolbar{display:none;}
+    section.panel{display:block !important;}
+    body{padding-bottom:0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">English for Tech Professionals</div>
+    <h1>Past Simple x Present Perfect</h1>
+    <p>Caroline — frases sobre a sua própria rotina para fixar a diferença entre os dois tempos</p>
+  </div>
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="rules">Regras rápidas</button>
+    <button class="tab-btn" data-tab="practice">Prática guiada</button>
+    <button class="tab-btn" data-tab="routine">Sua rotina</button>
+    <button class="tab-btn" data-tab="speaking">Falado</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ===================== RULES ===================== -->
+  <section class="panel active" id="rules">
+    <h2 class="section-title">Quando usar cada um</h2>
+    <p class="section-sub">A regra não é o significado da ação — é se o tempo em que ela aconteceu está fechado ou ainda "aberto".</p>
+
+    <div class="rule-grid">
+      <div class="rule-card">
+        <h3>Past Simple</h3>
+        <p>Ação terminada, em um momento específico e já passado. O quando importa.</p>
+        <div class="markers"><span>yesterday</span><span>last week</span><span>in 2023</span><span>two days ago</span><span>on Monday</span></div>
+        <div class="ex">I <b>presented</b> the roadmap to the global team last Tuesday.</div>
+      </div>
+      <div class="rule-card">
+        <h3>Present Perfect</h3>
+        <p>Ação sem hora marcada, ou período que ainda não terminou (esta semana, este mês, minha carreira até agora).</p>
+        <div class="markers"><span>already</span><span>yet</span><span>just</span><span>since</span><span>for</span><span>this week</span><span>ever / never</span></div>
+        <div class="ex">I <b>have presented</b> the roadmap to three different teams so far.</div>
+      </div>
+    </div>
+
+    <div class="rule-card" style="margin-bottom:20px;">
+      <h3>O mesmo verbo, dois contextos diferentes</h3>
+      <p><b>Past Simple:</b> "I <b>updated</b> the campaign brief yesterday." — aconteceu, acabou, tempo marcado.</p>
+      <p><b>Present Perfect:</b> "I <b>have updated</b> the campaign brief three times this month." — período (this month) ainda está rolando.</p>
+    </div>
+
+    <div class="checklist">
+      <b>Antes de escrever cada frase, pergunte:</b>
+      Essa ação tem uma hora/data marcada e o período já fechou? → Past Simple.<br>
+      Essa ação aconteceu em um período que ainda continua (hoje, esta semana, minha carreira) ou não importa quando exatamente? → Present Perfect.
+    </div>
+  </section>
+
+  <!-- ===================== PRACTICE ===================== -->
+  <section class="panel" id="practice">
+    <h2 class="section-title">Prática guiada</h2>
+    <p class="section-sub">Complete com a forma correta do verbo entre parênteses (Past Simple ou Present Perfect).</p>
+
+    <div class="score-bar-wrap">
+      <span class="score-label" id="scoreLabel">0 / 8 correct</span>
+      <div class="score-bar-track"><div class="score-bar-fill" id="scoreFill"></div></div>
+    </div>
+
+    <div id="fillBlanks"></div>
+  </section>
+
+  <!-- ===================== ROUTINE (PRODUCTION) ===================== -->
+  <section class="panel" id="routine">
+    <h2 class="section-title">Sua rotina, suas frases</h2>
+    <p class="section-sub">Escreva frases verdadeiras sobre você e o seu trabalho. Não existe resposta errada de conteúdo — o importante é o tempo verbal.</p>
+
+    <div class="instructions">Dica: leia o marcador de tempo (tag colorida) antes de escrever. Ele te diz qual tempo verbal usar.</div>
+
+    <div id="promptsBox"></div>
+  </section>
+
+  <!-- ===================== SPEAKING ===================== -->
+  <section class="panel" id="speaking">
+    <h2 class="section-title">Falado</h2>
+    <p class="section-sub">Fale em voz alta antes que o tempo acabe. Tente misturar os dois tempos verbais em cada resposta.</p>
+    <div id="speakingBox"></div>
+  </section>
+
+</main>
+
+<div class="toolbar">
+  <button class="btn-save" id="saveBtn">Salvar respostas</button>
+  <button class="btn-copy" id="copyBtn">Copiar para o Notion</button>
+  <button class="btn-pdf" id="pdfBtn">Baixar PDF</button>
+  <span class="save-msg" id="saveMsg"></span>
+</div>
+
+<footer>Past Simple x Present Perfect — produção sobre a rotina, feito para as aulas da Caroline.</footer>
+
+<script>
+const STORAGE_KEY = "caroline_pastsimple_presentperfect_routine_v1";
+
+// ---------- TABS ----------
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ---------- EXERCISE: GUIDED FILL IN THE BLANK ----------
+const fillData = [
+  {text:"I ___ (join) this company in 2021.", accept:["joined"]},
+  {text:"I ___ (already / update) the campaign timeline this week.", accept:["have already updated","already have updated"]},
+  {text:"Last month, our team ___ (launch) a new feature for the app.", accept:["launched"]},
+  {text:"I ___ never ___ (present) to the global marketing team before this quarter.", accept:["have presented"]},
+  {text:"She ___ (send) the report to the stakeholders yesterday afternoon.", accept:["sent"]},
+  {text:"We ___ (not finish) the localization review yet.", accept:["have not finished","haven't finished"]},
+  {text:"I ___ (have) three meetings with the international team so far this week.", accept:["have had"]},
+  {text:"Two years ago, I ___ (move) from a different department into marketing.", accept:["moved"]}
+];
+
+const fillBlanksEl = document.getElementById('fillBlanks');
+const answeredCorrectly = new Set();
+
+fillData.forEach((item,i)=>{
+  const parts = item.text.split('___');
+  const box = document.createElement('div');
+  box.className = 'qbox';
+  let html = `<div class="qnum">Question ${i+1}</div><div class="qtext">`;
+  parts.forEach((p,pi)=>{
+    html += p;
+    if(pi < parts.length-1){
+      html += `<input type="text" data-idx="${i}" data-part="${pi}" autocomplete="off" placeholder="verb">`;
+    }
+  });
+  html += `</div><div class="feedback" id="fb-${i}"></div>`;
+  box.innerHTML = html;
+  fillBlanksEl.appendChild(box);
+});
+
+fillBlanksEl.addEventListener('input', (e)=>{
+  if(e.target.tagName !== 'INPUT') return;
+  const idx = parseInt(e.target.dataset.idx);
+  const qbox = e.target.closest('.qbox');
+  const inputs = qbox.querySelectorAll('input');
+  const combined = Array.from(inputs).map(i=>i.value.trim().toLowerCase()).join(' ').replace(/\s+/g,' ').trim();
+  const fb = document.getElementById('fb-'+idx);
+  if(combined.length === 0){
+    inputs.forEach(i=>i.classList.remove('correct','wrong'));
+    fb.textContent = '';
+    fb.className = 'feedback';
+    return;
+  }
+  const isCorrect = fillData[idx].accept.some(a=>combined === a || combined.includes(a));
+  if(isCorrect){
+    inputs.forEach(i=>{i.classList.add('correct');i.classList.remove('wrong');});
+    fb.textContent = '✓ Correct';
+    fb.className = 'feedback correct';
+    if(!answeredCorrectly.has(idx)){answeredCorrectly.add(idx);updateScore();}
+  } else {
+    inputs.forEach(i=>{i.classList.add('wrong');i.classList.remove('correct');});
+    fb.textContent = 'Try again';
+    fb.className = 'feedback wrong';
+    if(answeredCorrectly.has(idx)){answeredCorrectly.delete(idx);updateScore();}
+  }
+});
+
+function updateScore(){
+  const n = answeredCorrectly.size;
+  document.getElementById('scoreLabel').textContent = n + ' / 8 correct';
+  document.getElementById('scoreFill').style.width = (n/8*100)+'%';
+}
+
+// ---------- ROUTINE PROMPTS (PRODUCTION) ----------
+const promptData = [
+  {tag:"Past Simple — yesterday", text:"Escreva 1 frase sobre algo que você fez ontem no trabalho.", model:"I reviewed the Q3 campaign budget with my manager."},
+  {tag:"Past Simple — last week / last month", text:"Escreva 1 frase sobre algo que você terminou na semana ou no mês passado.", model:"Last month, I finalized the technical spec for the new dashboard."},
+  {tag:"Present Perfect — already / yet", text:"Escreva 1 frase com 'already' ou 'yet' sobre uma tarefa do seu trabalho.", model:"I haven't replied to the global team's email yet."},
+  {tag:"Present Perfect — just", text:"Escreva 1 frase com 'just' sobre algo que você acabou de terminar hoje.", model:"I have just finished the presentation for tomorrow's meeting."},
+  {tag:"Present Perfect — since / for", text:"Escreva 1 frase com 'since' ou 'for' sobre há quanto tempo você trabalha na área de tecnologia.", model:"I have worked in tech for five years."},
+  {tag:"Present Perfect — this week / this month", text:"Escreva 1 frase sobre quantas vezes você fez algo esta semana ou este mês.", model:"I have had four meetings with the global team this week."},
+  {tag:"Mix — sua escolha", text:"Escreva 2 frases sobre a sua rotina de trabalho, uma em cada tempo verbal, e explique rapidamente por que escolheu cada um.", model:"I joined this project in January (specific, closed time — Past Simple). I have joined three new projects this year (period still open — Present Perfect)."}
+];
+
+const promptsBoxEl = document.getElementById('promptsBox');
+promptData.forEach((item,i)=>{
+  const card = document.createElement('div');
+  card.className = 'prompt-card';
+  card.innerHTML = `
+    <div class="qnum">Prompt ${i+1}</div>
+    <span class="tag">${item.tag}</span>
+    <div class="qtext">${item.text}</div>
+    <textarea data-key="prompt-${i}" placeholder="Escreva sua frase aqui..."></textarea>
+    <details class="model">
+      <summary>Ver um exemplo</summary>
+      <div class="model-text">${item.model}</div>
+    </details>
+  `;
+  promptsBoxEl.appendChild(card);
+});
+
+// ---------- SPEAKING ----------
+const speakingData = [
+  {q:"Tell me what you did at work yesterday, step by step.", hint:"Use Past Simple", seconds:45},
+  {q:"What have you done so far this week at work?", hint:"Use Present Perfect", seconds:45},
+  {q:"How long have you worked in tech? What changed since you started?", hint:"Use Present Perfect with since/for + Past Simple", seconds:60},
+  {q:"Tell me about a project you finished last month. What happened?", hint:"Use Past Simple", seconds:60},
+  {q:"Have you ever presented to an international team? Tell me about the most recent time.", hint:"Use Present Perfect, then switch to Past Simple for details", seconds:60}
+];
+
+const speakingBoxEl = document.getElementById('speakingBox');
+speakingData.forEach((item,i)=>{
+  const card = document.createElement('div');
+  card.className = 'speak-card';
+  card.innerHTML = `
+    <div class="qnum">Question ${i+1}</div>
+    <div class="qtext">${item.q}</div>
+    <div class="hint">${item.hint}</div>
+    <div class="timer-row">
+      <button class="timer-btn" data-seconds="${item.seconds}" data-idx="${i}">Start (${item.seconds}s)</button>
+      <div class="progress-track"><div class="progress-fill" id="prog-${i}"></div></div>
+      <div class="timer-display" id="time-${i}">${item.seconds}s</div>
+    </div>
+  `;
+  speakingBoxEl.appendChild(card);
+});
+
+speakingBoxEl.addEventListener('click', (e)=>{
+  if(!e.target.classList.contains('timer-btn')) return;
+  const idx = e.target.dataset.idx;
+  const total = parseInt(e.target.dataset.seconds);
+  let remaining = total;
+  const display = document.getElementById('time-'+idx);
+  const fill = document.getElementById('prog-'+idx);
+  e.target.disabled = true;
+  e.target.textContent = 'Speaking...';
+  fill.classList.remove('danger');
+  fill.style.width = '100%';
+  const interval = setInterval(()=>{
+    remaining--;
+    display.textContent = remaining + 's';
+    fill.style.width = (remaining/total*100)+'%';
+    if(remaining <= 10){fill.classList.add('danger');}
+    if(remaining <= 0){
+      clearInterval(interval);
+      display.textContent = 'Done';
+      e.target.disabled = false;
+      e.target.textContent = 'Restart (' + total + 's)';
+    }
+  },1000);
+});
+
+// ---------- AUTOSAVE / SAVE / COPY / PDF ----------
+function collectData(){
+  const data = {};
+  document.querySelectorAll('#promptsBox textarea[data-key]').forEach(t=>{
+    data[t.dataset.key] = t.value;
+  });
+  document.querySelectorAll('#fillBlanks input[type=text]').forEach((inp,i)=>{
+    data['practice-'+i] = inp.value;
+  });
+  return data;
+}
+
+function saveData(showMsg){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(collectData()));
+    if(showMsg){
+      const msg = document.getElementById('saveMsg');
+      msg.textContent = 'Salvo ✓';
+      setTimeout(()=>{msg.textContent='';}, 2500);
+    }
+  }catch(err){console.error('Save failed', err);}
+}
+
+function loadData(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return;
+    const data = JSON.parse(raw);
+    document.querySelectorAll('#promptsBox textarea[data-key]').forEach(t=>{
+      if(data[t.dataset.key] !== undefined) t.value = data[t.dataset.key];
+    });
+    document.querySelectorAll('#fillBlanks input[type=text]').forEach((inp,i)=>{
+      if(data['practice-'+i] !== undefined){
+        inp.value = data['practice-'+i];
+        inp.dispatchEvent(new Event('input'));
+      }
+    });
+  }catch(err){console.error('Load failed', err);}
+}
+
+document.addEventListener('input', (e)=>{
+  if(e.target.matches('textarea[data-key], #fillBlanks input[type=text]')){
+    saveData(false);
+  }
+});
+
+document.getElementById('saveBtn').addEventListener('click', ()=>saveData(true));
+
+document.getElementById('copyBtn').addEventListener('click', ()=>{
+  let text = "PAST SIMPLE x PRESENT PERFECT — Caroline\n\n";
+  text += "SUA ROTINA:\n";
+  promptData.forEach((item,i)=>{
+    const val = document.querySelector(`textarea[data-key="prompt-${i}"]`).value.trim();
+    text += `${i+1}. [${item.tag}] ${val || '(não respondido)'}\n`;
+  });
+  text += "\nPRÁTICA GUIADA:\n";
+  fillData.forEach((item,i)=>{
+    const inputs = document.querySelectorAll(`#fillBlanks .qbox:nth-child(${i+1}) input`);
+    const val = Array.from(inputs).map(inp=>inp.value.trim()).join(' ');
+    text += `${i+1}. ${val || '(não respondido)'}\n`;
+  });
+  navigator.clipboard.writeText(text).then(()=>{
+    const msg = document.getElementById('saveMsg');
+    msg.textContent = 'Copiado ✓';
+    setTimeout(()=>{msg.textContent='';}, 2500);
+  }).catch(()=>{
+    alert('Não foi possível copiar automaticamente. Selecione o texto manualmente.');
+  });
+});
+
+document.getElementById('pdfBtn').addEventListener('click', ()=>{
+  document.querySelectorAll('.panel').forEach(p=>p.style.display='block');
+  html2pdf().set({
+    margin:10,
+    filename:'caroline-past-simple-present-perfect.pdf',
+    html2canvas:{scale:2},
+    jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
+  }).from(document.querySelector('main')).save().then(()=>{
+    document.querySelectorAll('.panel').forEach(p=>p.classList.contains('active') ? p.style.display='block' : p.style.display='none');
+  });
+});
+
+window.addEventListener('load', loadData);
+</script>
+
+</body>
+</html>
